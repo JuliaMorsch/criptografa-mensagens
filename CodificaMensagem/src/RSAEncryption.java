@@ -1,3 +1,5 @@
+// Criptografia Assimétrica RSA
+
 import java.security.*;
 import java.util.Base64;
 
@@ -23,6 +25,19 @@ public class RSAEncryption {
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
         byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedMessage));
         return new String(decryptedBytes);
+    }
+
+    public static void main(String[] args) throws Exception {
+        KeyPair keyPairArthur = generateKeyPair();
+        KeyPair keyPairWallace = generateKeyPair();
+
+        String message = "Essa é uma mensagem criptografada.";
+
+        String encryptedMessage = encrypt(message, keyPairWallace.getPublic());
+        System.out.println("Mensagem criptografada: " + encryptedMessage);
+
+        String decryptedMessage = decrypt(encryptedMessage, keyPairWallace.getPrivate());
+        System.out.println("Mensagem descriptografada: " + decryptedMessage);
     }
     
 }
